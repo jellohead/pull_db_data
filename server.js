@@ -9,8 +9,19 @@ app.use(express.static('./'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 
-app.get('/', function(req, res){
+app.get('/db', function(req, res){
 	console.log('GET requested');
+	pg.connect(conString, function(err, client, done) {
+		if(err) return;
+
+		client.query('SELECT * FROM comments', function(err, result) {
+			if(err) return;
+			done();
+			console.log(JSON.stringify(result.rows, null, 2));
+			res.writeHead(200, {'content-type': 'text/plain'})
+			res.end(JSON.stringify(result.rows, null, 2));
+		});
+	});
 });
 
 app.post('/', function(req, res){
