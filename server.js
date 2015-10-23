@@ -18,8 +18,10 @@ app.get('/db', function(req, res){
 			if(err) return;
 			done();
 			console.log(JSON.stringify(result.rows, null, 2));
-			res.writeHead(200, {'content-type': 'text/plain'})
-			res.end(JSON.stringify(result.rows, null, 2));
+			console.log('--------------------');
+			console.log(result.rows);
+			res.writeHead(200, {'content-type': 'text/plain'});
+			res.end(JSON.stringify(result.rows));
 		});
 	});
 });
