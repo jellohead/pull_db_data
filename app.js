@@ -2,8 +2,11 @@ var CommentList = React.createClass ({
 
   pullData: function() {
     $.get('/db', function (data) {
-      console.log(data.rows);
-    });
+      //console.log(data.rows);
+      console.log('Printing the data from comments database');
+    }).bind(this);
+    console.log('Seeing if get data is bound to this')
+    console.log(this.data);
   },
 
   render: function() {
@@ -11,6 +14,7 @@ var CommentList = React.createClass ({
 
       return(
         <div>
+        <h2>commentNodes</h2>
           <Comment name={comment.name} key={index}>
             {comment.text}
           </Comment>
